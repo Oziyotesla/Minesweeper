@@ -10,7 +10,7 @@
     
 5.  Ha a kattintott mező nem tartalmaz aknát, akkor megjelenik a mezőn lévő szám, amely jelzi, hogy hány szomszédos mező tartalmaz aknát.
 	
-6. A mező felfedése után a másik játékosak átkerül a lépés
+6. Egy mező felfedése után a másik játékosak átkerül a lépés
     
 7.  Ha az összes mező fel lett fedve vagy megjelölve, amely nem tartalmaz aknát, a játék véget ér, a játékosok nyertek.
     
@@ -46,6 +46,16 @@
 3.  Az egérgomb nyomva tartásával lehet jelölni a mezőket zászlóval.
     
 4.  A játékos az "Új játék" gombra kattintva új játékot indíthat el.
-	
-5. 
     
+
+Tesztesetek
+
+1. Kapcsolat megszakadás vizsgálat
+
+2. Bombák maximális számának ellenörzése
+
+3. Felrombantott bomba észlelése
+
+4. Ismételt lépés megakadályozásának ellenörzése
+
+5. Játék végéne ellenörzése

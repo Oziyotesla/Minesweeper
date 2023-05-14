@@ -1,3 +1,9 @@
+**Csapattagok:**
+
+```Kálai Árpád```
+```Plöchl Péter```
+```Mayer Levente```
+
 **Játékmenet**
 
 1.  A játékmező egy **N**x**M** méretű négyzetes rács, mely tartalmaz **B** db aknát (ahol **N**, **M** és **B** konfigurálható).
@@ -41,9 +47,9 @@
 
 1.  A játékot egérrel lehet játszani.
     
-2.  Az egérgombbal lehet kattintani a mezőkre.
+2.  Az ball egérgombbal lehet felfedni a mezőket, a zászlóval megjelölt mezők nem kerülnek felfedésre.
     
-3.  Az egérgomb nyomva tartásával lehet jelölni a mezőket zászlóval.
+3.  Az jobb egérgomb lenyomásával lehet megjelölni a mezőket zászlóval.
     
 4.  A játékos az "Új játék" gombra kattintva új játékot indíthat el.
     

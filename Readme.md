@@ -7,10 +7,10 @@
 ## Játék rövid leírása
 
 Az aknakereső egy olyan játék, amelyben a játékosnak az a feladata, hogy megtalálja az összes aknát,
-amelyek rejtőznek a játéktéren elhelyezett mezők között. A játék általában egy négyzet alakú rácson játszódik, 
-amelyben a mezők lehetnek fedetlenek vagy fedett állapotban. Az aknákat véletlenszerűen helyezik el a mezők között.
+amelyek rejtőznek a játéktéren elhelyezett mezők alatt. A játék általában egy négyzet alakú rácson játszódik, 
+amelyben a mezők lehetnek fedetlenek vagy fedett állapotban. Az aknákat véletlenszerűen helyezik el a mezők alatt.
 
-A játékos egymás után elkezdi felfedni a mezőket. Két játékos esetén egyszer az egyik, egyszer pedig a másik feld fel egy-egy mezőt.
+A játékos egymás után elkezdi felfedni a mezőket. Két játékos esetén egyszer az egyik, egyszer pedig a másik fed fel egy-egy mezőt.
 
 ## Játékmenet
 
@@ -18,13 +18,13 @@ A játékos egymás után elkezdi felfedni a mezőket. Két játékos esetén eg
     
 2.  Az aknák elhelyezkedése véletlenszerű.
     
-3.  Az első kattintás után indul a játék, amelynek során a játékosnak kattintania kell a mezőkre.
+3.  Az első kattintással kezdődik a játék és ezzel együtt a számláló.
     
 4.  Ha a kattintott mező tartalmaz egy aknát, a játék véget ér, a játékos veszített.
     
 5.  Ha a kattintott mező nem tartalmaz aknát, akkor megjelenik a mezőn lévő szám, amely jelzi, hogy hány szomszédos mező tartalmaz aknát.
 	
-6. Egy mező felfedése után a másik játékosra átkerül a lépés
+6.  Egy mező felfedése után a másik játékosra átkerül a lépés
     
 7.  Ha az összes mező fel lett fedve vagy megjelölve, amely nem tartalmaz aknát, a játék véget ér, a játékosok nyertek.
 
@@ -41,25 +41,27 @@ A játékos egymás után elkezdi felfedni a mezőket. Két játékos esetén eg
         
     -   jelölt
         
-3.  A felfedett mezőkön számok jelennek meg, amelyek jelzik, hogy hány akna található a szomszédos mezőkön.
+3.  A felfedett mezőkön számok jelennek meg, amelyek jelzik, hogy hány akna található a szomszédos mezőkön. Ha a szám nulla lenne akkor a mezőn nem jelenik meg szám.
     
 4.  A jelölt mezőkre egy zászló kerül, hogy jelezze, hogy ott akna található.
 
 
 ## Játékbeállítások
 
-A játékos kiválaszthatja a játék nehézségi szintjét (könnyű, közepes, nehéz), ami határozza meg a rács méretét és az aknák számát.
+A játékos kiválaszthatja a játék nehézségi szintjét (könnyű, közepes, nehéz), ami meghatározza a rács méretét és az aknák számát.
 
 
 ## Játékvezérlés
 
 -   A játékot egérrel lehet játszani.
     
--   Az ball egérgombbal lehet felfedni a mezőket, a zászlóval megjelölt mezők nem kerülnek felfedésre.
+-   A ball egérgombbal lehet felfedni a mezőket, a zászlóval megjelölt mezők nem kerülnek felfedésre.
 
--   Az jobb egérgomb lenyomásával lehet megjelölni a mezőket zászlóval.
+-   A jobb egérgomb lenyomásával lehet megjelölni a mezőket zászlóval.
     
--   A játékos az "Új játék" gombra kattintva új játékot indíthat el.
+-   A játékos az ```Új játék``` gombra kattintva új játékot indíthat el.
+
+-   A játékot megszakítani az ```exit``` gomb megnyomásával lehet.
 
 ## Játék elkezdése
 
@@ -72,11 +74,11 @@ Ha csatlakozott valaki a játékhoz, akkor megjelenik egy zöld gomb, amire katt
 
 ### Játékhoz csatlakozás
 
-A host által létrehozott játékhoz tartozó IP cím beírásával, majd a connect gomb megnyomása után megpróbál csatlakozni.
+A host által létrehozott játékhoz tartozó IP cím beírásával, majd a ```Connect``` gomb megnyomása után megpróbál csatlakozni.
 Ha sikerült csatlakozni, kapunk egy visszaigazolást annak sikerességéről és várunk míg a Host elindítja a játékot.
 
 
-##Tesztesetek
+## Tesztesetek
 
 1. Kapcsolat megszakadás vizsgálat
 

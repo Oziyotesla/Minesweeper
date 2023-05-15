@@ -102,3 +102,21 @@ Leader board
 Játék végén, ha kellően gyors(ak) a játékosok felugrik leader board ablak ahová beírhatják a játékosok a neveiket,
 amin a top 10 eredmény látszik és nevünk örök dicsőségben fönt maradhat.
 
+
+
+## Hálózati kapcsolat implementációja
+
+### CommunicationHandler
+
+Ez az osztály felelős a hálózati kommunikáció összefogásáért.
+A `CommunicationHandler` objektum feladata a játékosok közötti kommunikáció lebonyolítása. 
+Ez egyrészt a kapcsolat felépítését, másrészt a játék során az egyes lépések továbbítását jelenti.
+
+Mielőtt elkezdődhetne a játék, a felhasználóknak két lehetőségük van, de legalább az egyiküknek/host létre kell hoznia egy szervert.
+Ez a szerver rendelkezik egy IP-címmel, amit a második játékos/kliens, megadhat a menüben,
+majd pedig megpróbálhat csatlakozni hozzá. A szerver efogadja a csatlakozási kérelmet, ha még nem lépett be másik kliens. 
+Ekkor a Host elindíthatja a játékot.
+
+A játék kezdetekor a Host által generált aknamezőt megkapja a kliens. A játékosok egymás után lépnek minden lépés után 
+átküldésre kerül az összes elhelyezett zászló helyzete, illetve az aktuálisan felfedett mezőt. 
+Továbbá a Host rendszeresen küld egy időcsomagot, amit a kliens visszaigazol, hogy megkapta.

@@ -1,5 +1,15 @@
 MineSweeperMain:
-
+//initGui
+//CreateGameBoard
+//initCommunicationController
+//TakeGuiInstructions
+//HighScoreSaveFile
+//HighScoreReadFile
+//
+-yourTurn
+-ServerName
+-SinglePlayer/Multiplayer
+-
 
 MainMenuLayout
 
@@ -16,16 +26,22 @@ MouseHandler
 
 
 GameBoard
-
-
-
+//flag placement
+//revealXY
+//reference table
+//Draw GameBoard
+-xSize
+-ySize
+-bombCount
+-exploded
 
 Block:
--row
--column
-- is falgged
--isBombed
--is
+-x
+-y
+-isFlagged
+-isBomb
+-isRevealed
+
 
 
 
@@ -34,3 +50,30 @@ CommunicationController
 
 
 Room
+
+
+
+MineSweeperMain
+
+Ez az első osztály ami létrehozódik a program elindításakor. A Main felel a ```GUI``` elindításáért a ```GameBoard``` ```Communicationcontroller``` ```MouseHandler``` és ```GameLayout``` osztály meghívásáért.
+Kezeli az egyjátékos és kétjátékos esetén felmerülő jelzések és adatok eljuttatását a megfelelő osztályokhoz.
+A Start jelzésre meghívja a GameBoard osztály konstruktorát a játékmező méretével és a bombák számával argumentumként
+
+
+GameBoard
+
+Ez az osztály hozódik létre akkor amikor elindul, argumentumként megkapja a 
+a játék kezeli a mezőket ahol a bombák kerülnek elhelyezésre.
+Meghívja a megfelelő mező reveal fügvényét ha fel kel fedni, illetve flag fügvényét ha meg kell jelölni.
+Az exploded fügvényét meghívva a visszatérési értéke jelzi, hogy a játékos felrobbant vagy biztonságban van még.
+
+
+Block
+
+Tartalmazza, hogy az adott mezőn van-e bomba megvan-e jelölve zászlóval, fel van-e fedve illetve hol van a mezők hálóján.
+Ha fel kell fedni akkor a reveal fügvényét meghívva lehet azt megtenni.
+A zászlóval megjelöléshez a flag fügvényét kell meghívni.
+
+LeaderBoard
+
+Az osztály felelős a sikeres játékok pontszámának mentéséért, és ha végetért a játék akkor a GameLayout osztálynak való elküldéséért

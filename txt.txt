@@ -77,3 +77,28 @@ A zászlóval megjelöléshez a flag fügvényét kell meghívni.
 LeaderBoard
 
 Az osztály felelős a sikeres játékok pontszámának mentéséért, és ha végetért a játék akkor a GameLayout osztálynak való elküldéséért
+
+--------------------------------------------------------------------------------------
+
+GUI
+
+MineSweeperMain
+
+A program elindítása után ez a felület fogja fogadni a játékosokat.
+A játékos az 1 player, 2 player és a Highscore gombokkal találja szemben magát.
+Az 1 player gombra kattintva a nehézségi mód(pálya méret és bombák száma) kiválasztását követően a kezdés gombra nyomva indíthatja el a játékot.
+A 2 player gombra kattintva megjelenik a create server és host gomb amik segítségével csatlakozni tud két játékos.
+	Sikeres csatlakozást követve a host választ nehézségi szintent és a startgombbal elidítja a játékot.
+
+Game layout
+
+A betölt a kiválasztott nehézségi szintnek megfelelő pálya ahol az ablak tetjén egy sorban helyezkednek el az aktuális játékos számát jelző felirat(1P/2P).
+A számláló ami mutatja a kezdéstől eltelt időté és az akna számláló ami számolja a még lent lévő és nem zászlózott bombák számát.
+Az akna mező önálló négyzetekből áll melyek kattintás(felfedés) hatására szint váltanak és megjelenhet bennük egy szám vagy rosszabb esetben egy bomba.
+Játék végén megjelenik a Victoriy vagy a Defeat felirat.
+
+Leader board
+
+Játék végén, ha kellően gyors(ak) a játékosok felugrik leader board ablak ahová beírhatják a játékosok a neveiket,
+amin a top 10 eredmény látszik és nevünk örök dicsőségben fönt maradhat.
+

@@ -1,0 +1,66 @@
+# Minesweeper tervdokumentáció
+
+![img_1.png](img_1.png)
+
+
+## MineSweeperMain
+
+Ez az első osztály ami létrehozódik a program elindításakor. A Main felel a ```GUI``` elindításáért a ```GameBoard``` ```Communicationcontroller``` ```MouseHandler``` és ```GameLayout``` osztály meghívásáért.
+Kezeli az egyjátékos és kétjátékos esetén felmerülő jelzések és adatok eljuttatását a megfelelő osztályokhoz.
+A Start jelzésre meghívja a GameBoard osztály konstruktorát a játékmező méretével és a bombák számával argumentumként
+
+
+### GameBoard
+
+Ez az osztály hozódik létre akkor amikor elindul, argumentumként megkapja a
+a játék kezeli a mezőket ahol a bombák kerülnek elhelyezésre.
+Meghívja a megfelelő mező reveal fügvényét ha fel kel fedni, illetve flag fügvényét ha meg kell jelölni.
+Az exploded fügvényét meghívva a visszatérési értéke jelzi, hogy a játékos felrobbant vagy biztonságban van még.
+
+
+### Block
+
+Tartalmazza, hogy az adott mezőn van-e bomba megvan-e jelölve zászlóval, fel van-e fedve illetve hol van a mezők hálóján.
+Ha fel kell fedni akkor a reveal fügvényét meghívva lehet azt megtenni.
+A zászlóval megjelöléshez a flag fügvényét kell meghívni.
+
+## GUI
+
+### MineSweeperMain
+
+A program elindítása után ez a felület fogja fogadni a játékosokat.
+A játékos az 1 player, 2 player és a Highscore gombokkal találja szemben magát.
+Az 1 player gombra kattintva a nehézségi mód(pálya méret és bombák száma) kiválasztását követően a kezdés gombra nyomva indíthatja el a játékot.
+A 2 player gombra kattintva megjelenik a create server és host gomb amik segítségével csatlakozni tud két játékos.
+Sikeres csatlakozást követve a host választ nehézségi szintent és a startgombbal elidítja a játékot.
+
+### Game layout
+
+A betölt a kiválasztott nehézségi szintnek megfelelő pálya ahol az ablak tetjén egy sorban helyezkednek el az aktuális játékos számát jelző felirat(1P/2P).
+A számláló ami mutatja a kezdéstől eltelt időté és az akna számláló ami számolja a még lent lévő és nem zászlózott bombák számát.
+Az akna mező önálló négyzetekből áll melyek kattintás(felfedés) hatására szint váltanak és megjelenhet bennük egy szám vagy rosszabb esetben egy bomba.
+Játék végén megjelenik a Victoriy vagy a Defeat felirat.
+
+### Leader board
+
+Játék végén, ha kellően gyors(ak) a játékosok felugrik leader board ablak ahová beírhatják a játékosok a neveiket,
+amin a top 10 eredmény látszik és nevünk örök dicsőségben fönt maradhat.
+
+
+
+## Hálózati kapcsolat
+
+### CommunicationHandler
+
+Ez az osztály felelős a hálózati kommunikáció összefogásáért.
+A `CommunicationHandler` objektum feladata a játékosok közötti kommunikáció lebonyolítása.
+Ez egyrészt a kapcsolat felépítését, másrészt a játék során az egyes lépések továbbítását jelenti.
+
+Mielőtt elkezdődhetne a játék, a felhasználóknak két lehetőségük van, de legalább az egyiküknek/host létre kell hoznia egy szervert.
+Ez a szerver rendelkezik egy IP-címmel, amit a második játékos/kliens, megadhat a menüben,
+majd pedig megpróbálhat csatlakozni hozzá. A szerver efogadja a csatlakozási kérelmet, ha még nem lépett be másik kliens.
+Ekkor a Host elindíthatja a játékot.
+
+A játék kezdetekor a Host által generált aknamezőt megkapja a kliens. A játékosok egymás után lépnek minden lépés után
+átküldésre kerül az összes elhelyezett zászló helyzete, illetve az aktuálisan felfedett mezőt.
+Továbbá a Host rendszeresen küld egy időcsomagot, amit a kliens visszaigazol, hogy megkapta.

@@ -7,8 +7,8 @@ public class GameBoard {
     private final int MIN_X = 8;
     private final int MIN_Y = 8;
     private final int MAXiteration = 1000;
-    private int xSize = 0;
-    private int ySize = 0;
+    private int xSize = 8;
+    private int ySize = 8;
     private int BombCount = 0;
     private Random rand = new Random();
     //reference table
@@ -231,5 +231,20 @@ public class GameBoard {
         else {
             return false;
         }
+    }
+    public int getXSize(){
+        return xSize;
+    }
+    public int getYSize(){
+        return ySize;
+    }
+    public boolean[][] getBombMap(){
+        boolean[][] bool = new boolean[xSize][ySize];
+        for(int x=0; x<xSize;x++){
+            for(int y=0; y<ySize;y++){
+                bool[x][y] = board[x][y].isBomb();
+            }
+        }
+        return bool;
     }
 }

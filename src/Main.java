@@ -1,3 +1,6 @@
+import communication.CommunicationHandler;
+import communication.StartData;
+
 import java.util.Scanner;
 
 public class Main {
@@ -8,8 +11,10 @@ public class Main {
     private static boolean turn = false;
     private static GameBoard gameboard = null;
     private static int difficulty = 0;
+    private static CommunicationHandler communicationHandler = null;
     private static HighScoreTracker ScoreTracker = new HighScoreTracker();
     private static MainMenuWindow mainmenu = null;
+    private static StartData startData = null;
     public static void main(String[] args) {
         int err = 0;
         gameboard = new GameBoard();
@@ -23,18 +28,9 @@ public class Main {
         //GUI
         mainmenu = new MainMenuWindow();
         //GUI gui = new GUI();
-        if(err > 0){
+        if(err > 0) {
             exit = true;
         }
-        //IP
-        IP ip = new IP();
-        if(err > 0){
-            exit = true;
-        }
-
-        //event handler while loop
-        //gameboard.revealXY(0,0);
-        //gameboard.printBoard();
         //ScoreTracker.loadScoresFromFile("highscore.txt");
         try{Thread.sleep(200);}
         catch(InterruptedException ex) {Thread.currentThread().interrupt();}
@@ -56,9 +52,15 @@ public class Main {
                 //    exit = true;
                 }
             }
+            gameboard = new GameBoard();
+            try{Thread.sleep(200);}
+            catch(InterruptedException ex) {Thread.currentThread().interrupt();}
             //timer
             //board update
             if(gameboard.isVictory()){
+            }
+            if(Multi){
+
             }
             //GUI update
             //tcp ip update
@@ -99,14 +101,26 @@ public class Main {
         Multi = MultiPlayer;
         diffToBoard(difficulty);
         gameboard.generateBoard();
+        try{Thread.sleep(1000);}
+        catch(InterruptedException ex) {Thread.currentThread().interrupt();}
         if(Multi){
             //send board to other player
+            startData = new StartData();
+            startData.setXsize(gameboard.getXSize());
+            startData.setYsize(gameboard.getYSize());
+            startData.setBombMap(gameboard.getBombMap());
+            //communicationHandler.sendStartGame(startData);
             turn = true;
         }
         else{
             turn = true;
         }
         mainmenu.dispose();
+    }
+
+    public static void CreateServer() {
+        communicationHandler = new CommunicationHandler();
+        communicationHandler.hostGame();
     }
 
     public void IPGame(int difficulty,boolean[][] bombarray){

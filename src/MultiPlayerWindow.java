@@ -10,7 +10,7 @@ public class MultiPlayerWindow extends JFrame {
 
     public MultiPlayerWindow() {
         setTitle("Minesweeper - Multiplayer");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
 
         // Create the multiplayer panel
@@ -28,6 +28,8 @@ public class MultiPlayerWindow extends JFrame {
                 System.out.println("Create Server button clicked");
                 // Create server logic here
                 //setServerActive(true);
+                //Main.clickGame(true);
+                Main.CreateServer();
             }
         });
 
@@ -48,6 +50,8 @@ public class MultiPlayerWindow extends JFrame {
         startGameButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Start Game button clicked");
+                Main.clickGame(true);
+                dispose();
                 // Start game logic here
             }
         });

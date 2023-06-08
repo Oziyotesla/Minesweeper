@@ -2,10 +2,13 @@ import java.util.Scanner;
 
 public class Main {
     public static boolean exit = false;
+    private static final boolean DEBUG = true;
     private GameBoard board;
     private boolean Multi = false;
     private boolean turn = false;
     private static GameBoard gameboard;
+    private static HighScoreTracker ScoreTracker = new HighScoreTracker();
+    private static MainMenuWindow mainmenu;
     public static void main(String[] args) {
         int err = 0;
         gameboard = new GameBoard();
@@ -15,7 +18,8 @@ public class Main {
             exit = true;
         }
         //GUI
-        GUI gui = new GUI();
+        mainmenu = new MainMenuWindow();
+        //GUI gui = new GUI();
         if(err > 0){
             exit = true;
         }
@@ -24,25 +28,27 @@ public class Main {
         if(err > 0){
             exit = true;
         }
+
         //event handler while loop
         //gameboard.revealXY(0,0);
         //gameboard.printBoard();
+        //ScoreTracker.loadScoresFromFile("highscore.txt");
         loop();
     }
     private static void loop(){
         Scanner scanner = new Scanner(System.in);
         while(exit == false){
-
-            //gameloop System.currentTimeMillis() to make timer
-            gameboard.printBoard();
-            System.out.println("X kordinata:");
-            int x = scanner.nextInt();
-            System.out.println("Y koordinata:");
-            int y = scanner.nextInt();
-            if(gameboard.revealXY(x,y)){
+            if(DEBUG){
                 gameboard.printBoard();
-                System.out.println("Felrobbantal vege a jateknak0");
-                exit = true;
+                System.out.println("X kordinata:");
+                int x = scanner.nextInt();
+                System.out.println("Y koordinata:");
+                int y = scanner.nextInt();
+                if(gameboard.revealXY(x,y)){
+                    gameboard.printBoard();
+                    System.out.println("Felrobbantal vege a jateknak");
+                    exit = true;
+                }
             }
 
             //GUI is there change

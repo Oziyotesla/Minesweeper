@@ -14,7 +14,7 @@ public class ServerReceiveThread extends Thread {
     public ServerReceiveThread(ObjectInputStream objectInputStream, Connection connection) {
         this.objectInputStream = objectInputStream;
         this.connection = connection;
-        this.isRunning = true;
+        this.isRunning = false;
         System.out.println("Created ServerReceiveThread");
     }
 
@@ -58,5 +58,8 @@ public class ServerReceiveThread extends Thread {
 
     public void stopServer() {
         this.isRunning = false;
+    }
+    public void startServer() {
+        this.isRunning = true;
     }
 }

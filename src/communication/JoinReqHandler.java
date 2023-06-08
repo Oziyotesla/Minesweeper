@@ -38,6 +38,8 @@ public class JoinReqHandler extends Thread{
             if(serverSocket != null) {
                 new CreateConnection(serverSocket, communicationHandler);
                 System.out.println("Stop Join Req handler");
+                System.out.println("start Server thread");
+                communicationHandler.activeConnection.receiveThread.startServer();
                 stopListening();
             }
         }

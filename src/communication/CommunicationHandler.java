@@ -46,9 +46,9 @@ public class CommunicationHandler extends Thread {
             }
 
             if(response != null && response.type == Message.MessageType.joinAccepted) {
+                System.out.println("Joined Game");
                 this.clientReceiveThread = new ClientReceiveThread(this.clientObjectInputStream);
                 this.clientTransmitThread = new ClientTransmitThread(this.clientObjectOutputStream);
-                System.out.println("Joined a Game");
                 return true;
             }
         } catch (IOException e) {

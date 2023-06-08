@@ -8,12 +8,15 @@ public class CreateConnection {
     public CreateConnection(Socket serverSocket, CommunicationHandler communicationHandler) {
         Message response;
         try {
+
+            System.out.println("try create connect class");
             InputStream inputStream = serverSocket.getInputStream();
             OutputStream outputStream = serverSocket.getOutputStream();
             ObjectInputStream objectInputStream = new ObjectInputStream(inputStream);
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
 
             Message msg = (Message) objectInputStream.readObject();
+            System.out.println("managed to read msg");
             if (msg.type == Message.MessageType.joinRequest) {
                 response = new Message(Message.MessageType.joinAccepted, null);
                 objectOutputStream.writeObject(response);

@@ -12,6 +12,7 @@ public class GameBoard {
     private int BombCount = 0;
     private Random rand = new Random();
     //reference table
+    private static MinesweeperGUI minesweeperGUI;
     Block[][] board;
 
     GameBoard() {
@@ -100,6 +101,7 @@ public class GameBoard {
             for (int j = 0; j < ySize; j++) {
                 bombmap[i][j] = false;
             }
+
         }
 
         for (int i = 0; i < BombCount; i++) {
@@ -142,6 +144,9 @@ public class GameBoard {
         if (DEBUG) {
             System.out.printf("Neigbours are set.\n");
         }
+        minesweeperGUI = new MinesweeperGUI(xSize, ySize);
+        board[0][0].setGUIref(minesweeperGUI);
+
         return err;
     }
 
@@ -192,6 +197,39 @@ public class GameBoard {
     }
 
     public boolean revealXY(int x, int y) {
-        return board[x][y].reveal();
+        boolean bool = board[x][y].reveal();
+        isVictory();
+        return bool;
+    }
+
+    public boolean flagXY(int x, int y) {
+        board[x][y].setFlagged(!board[x][y].getFlag());
+        return board[x][y].getFlag();
+    }
+    public int getBombNeibourXY(int x, int y){
+        return board[x][y].getBombNeibour();
+    }
+    public void setGUIref(){
+        board[0][0].setGUIref(minesweeperGUI);
+
+    }
+    public boolean isVictory(){
+        int x,y;
+        int revealedcount = 0;
+        for(x=0;x<xSize;x++){
+            for(y=0;y<ySize;y++){
+                if(!board[x][y].isBomb()&board[x][y].isRevealed()){
+                    revealedcount++;
+                }
+            }
+        }
+        System.out.println(revealedcount+BombCount);
+        if(revealedcount+BombCount>=xSize*ySize) {
+            minesweeperGUI.victory();
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 }

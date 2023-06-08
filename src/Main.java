@@ -3,17 +3,20 @@ import java.util.Scanner;
 public class Main {
     public static boolean exit = false;
     private static final boolean DEBUG = true;
-    private GameBoard board;
-    private boolean Multi = false;
-    private boolean turn = false;
-    private static GameBoard gameboard;
+
+    private static boolean Multi = false;
+    private static boolean turn = false;
+    private static GameBoard gameboard = null;
+    private static int difficulty = 0;
     private static HighScoreTracker ScoreTracker = new HighScoreTracker();
-    private static MainMenuWindow mainmenu;
+    private static MainMenuWindow mainmenu = null;
     public static void main(String[] args) {
         int err = 0;
         gameboard = new GameBoard();
-        gameboard.setBoardSize(8,8,10);
-        err = gameboard.generateBoard();
+        try{Thread.sleep(200);}
+        catch(InterruptedException ex) {Thread.currentThread().interrupt();}
+        //gameboard.setBoardSize(8,8,10);
+        //err = gameboard.generateBoard();
         if(err > 0){
             exit = true;
         }
@@ -33,61 +36,69 @@ public class Main {
         //gameboard.revealXY(0,0);
         //gameboard.printBoard();
         //ScoreTracker.loadScoresFromFile("highscore.txt");
+        try{Thread.sleep(200);}
+        catch(InterruptedException ex) {Thread.currentThread().interrupt();}
         loop();
     }
     private static void loop(){
         Scanner scanner = new Scanner(System.in);
         while(exit == false){
             if(DEBUG){
-                gameboard.printBoard();
-                System.out.println("X kordinata:");
-                int x = scanner.nextInt();
-                System.out.println("Y koordinata:");
-                int y = scanner.nextInt();
-                if(gameboard.revealXY(x,y)){
-                    gameboard.printBoard();
-                    System.out.println("Felrobbantal vege a jateknak");
-                    exit = true;
+                //gameboard.printBoard();
+                //System.out.println("X kordinata:");
+                //int x = scanner.nextInt();
+                //System.out.println("Y koordinata:");
+                //int y = scanner.nextInt();
+                //if(gameboard.revealXY(x,y))
+                {
+                //    gameboard.printBoard();
+                //    System.out.println("Felrobbantal vege a jateknak");
+                //    exit = true;
                 }
             }
-
-            //GUI is there change
-            //TCP ip is there change
             //timer
             //board update
+            if(gameboard.isVictory()){
+            }
             //GUI update
             //tcp ip update
         }
-        scanner.close();
+        //scanner.close();
     }
-    public void clickBomb(int x, int y){
+    public static boolean clickBomb(int x, int y, boolean flag){
         boolean clickValid = (Multi == false)|((Multi == true)&(turn == true));
         if(clickValid) {
-            board.revealXY(x, y);
+            if (flag == false) {
+                return gameboard.revealXY(x, y);
+            }
+            else
+                return gameboard.flagXY(x, y);
         }
+        return false;
     }
 
 
-    private void diffToBoard(int diff){
+    private static void diffToBoard(int diff){
         switch(diff) {
             case 1:
-                board.setBoardSize(8,8,10);
+                gameboard.setBoardSize(8,8,10);
                 break;
             case 2:
-                board.setBoardSize(16,16,40);
+                gameboard.setBoardSize(16,16,40);
                 break;
             case 3:
-                board.setBoardSize(30,16,99);
+                gameboard.setBoardSize(30,16,99);
                 break;
             default:
-                board.setBoardSize(8,8,10);
+                gameboard.setBoardSize(8,8,10);
                 break;
         }
     }
 
-    public void clickGame(boolean MultiPlayer,int difficulty){
+    public static void clickGame(boolean MultiPlayer){
         Multi = MultiPlayer;
         diffToBoard(difficulty);
+        gameboard.generateBoard();
         if(Multi){
             //send board to other player
             turn = true;
@@ -95,11 +106,19 @@ public class Main {
         else{
             turn = true;
         }
+        mainmenu.dispose();
     }
 
     public void IPGame(int difficulty,boolean[][] bombarray){
         turn = false;
         diffToBoard(difficulty);
-        board.setBoard(bombarray);
+        gameboard.setBoard(bombarray);
+    }
+
+    public static int getBombNeibourXY(int x, int y){
+        return gameboard.getBombNeibourXY(x, y);
+    }
+    public static void setDifficulty(int diff){
+        difficulty = diff;
     }
 }

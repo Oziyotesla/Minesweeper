@@ -6,6 +6,8 @@ public class Block {
     private int x;
     private int y;
     private int bombNeibour;
+
+    private static MinesweeperGUI GUIref;
     private Block[] Neibours = new Block[9];
     Block(int x, int y, boolean Bomb) {
         this.isBomb = Bomb;
@@ -18,6 +20,10 @@ public class Block {
             System.out.printf("%d):", y);
             System.out.printf("%b  ", isBomb);
         }
+    }
+
+    public boolean getFlag(){
+        return isFlagged;
     }
 
     public boolean isBomb() {
@@ -45,6 +51,7 @@ public class Block {
         if(isRevealed){
             return isBomb;
         }
+        GUIref.revealEmptyCells(x, y);
         isRevealed = true;
         //redraw block
         if(isBomb == false) {
@@ -84,5 +91,13 @@ public class Block {
             System.out.print('h');
         }
         System.out.print(' ');
+    }
+    public int getBombNeibour(){
+        return bombNeibour;
+    }
+
+    public void setGUIref(MinesweeperGUI ref){
+        GUIref = ref;
+
     }
 }

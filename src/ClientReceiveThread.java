@@ -33,7 +33,7 @@ public class ClientReceiveThread extends Thread{
                         case clickData -> {
                             System.out.println("Received cilck data from server");
 //                            main.handleClickData(msg.data);
-                            Main.clickBomb(((ClickData)msg.data).x_cord,((ClickData)msg.data).y_cord,((ClickData)msg.data).flag);
+                            Main.receiveClick(((ClickData)msg.data).x_cord,((ClickData)msg.data).y_cord,((ClickData)msg.data).flag);
                             //todo handle request
                         }
                         case stopCommunication -> {

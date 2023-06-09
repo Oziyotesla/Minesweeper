@@ -70,6 +70,8 @@ public class Main {
     public static boolean clickBomb(int x, int y, boolean flag){
         boolean clickValid = (Multi == false)|((Multi == true)&(turn == true));
         if(clickValid) {
+            ClickData clickData = new ClickData(x,y,flag);
+            communicationHandler.sendClickData(clickData);
             if (flag == false) {
                 return gameboard.revealXY(x, y);
             }
@@ -145,5 +147,17 @@ public class Main {
     }
     public static void setDifficulty(int diff){
         difficulty = diff;
+    }
+
+    public static boolean receiveClick(int x, int y, boolean flag) {
+        boolean clickValid = (Multi == false)|((Multi == true)&(turn == true));
+        if(clickValid) {
+            if (flag == false) {
+                return gameboard.revealXY(x, y);
+            }
+            else
+                return gameboard.flagXY(x, y);
+        }
+        return false;
     }
 }

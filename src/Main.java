@@ -130,7 +130,7 @@ public class Main {
     }
 
     public static void IPGame(StartData startData){
-        turn = false;
+        turn = true;
         diffToBoard(startData.getDifficulty());
         //gameboard.setBoardSize(startData.getXsize(),startData.getYsize(),0);
         gameboard.setBoard(startData.getBombMap());

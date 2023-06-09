@@ -29,11 +29,11 @@ public class ClientReceiveThread extends Thread{
                         case startingMinefieldData -> {
                             System.out.println("Received start minefield from server");
                             Main.IPGame((StartData) msg.data);
-                            //todo handle request
                         }
                         case clickData -> {
                             System.out.println("Received cilck data from server");
 //                            main.handleClickData(msg.data);
+                            Main.clickBomb(((ClickData)msg.data).x_cord,((ClickData)msg.data).y_cord,((ClickData)msg.data).flag);
                             //todo handle request
                         }
                         case stopCommunication -> {

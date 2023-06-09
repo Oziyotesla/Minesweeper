@@ -11,7 +11,7 @@ public class DifficultyWindow extends JFrame {
 
     public DifficultyWindow() {
         setTitle("Difficulty Window");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
 
         // Create the difficulty panel

@@ -108,14 +108,19 @@ public class Main {
             startData = new StartData();
             startData.setXsize(gameboard.getXSize());
             startData.setYsize(gameboard.getYSize());
+            System.out.println("after setsize");
             startData.setBombMap(gameboard.getBombMap());
+            System.out.println("after getbombmap");
             //communicationHandler.sendStartGame(startData);
             turn = true;
         }
         else{
             turn = true;
         }
+        System.out.println("before dispose");
         mainmenu.dispose();
+        System.out.println("after dispose");
+
     }
 
     public static void CreateServer() {
@@ -127,6 +132,10 @@ public class Main {
         turn = false;
         diffToBoard(difficulty);
         gameboard.setBoard(bombarray);
+    }
+    public static void IPConnect(String IP ){
+        communicationHandler = new CommunicationHandler();
+        communicationHandler.joinGame(IP);
     }
 
     public static int getBombNeibourXY(int x, int y){

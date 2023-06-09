@@ -74,6 +74,8 @@ public class MainMenuWindow extends JFrame {
                 System.out.println("Connect selected. Text: " + text);
                 // Connect
                 //openMinesweeperGUI();
+                String ip = textField.getText();
+                Main.IPConnect(ip);
             }
         });
 

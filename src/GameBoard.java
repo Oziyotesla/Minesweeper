@@ -211,6 +211,9 @@ public class GameBoard {
 
     public boolean revealXY(int x, int y) {
         boolean bool = board[x][y].reveal();
+        if(bool == true){
+            minesweeperGUI.defeat();
+        }
         isVictory();
         return bool;
     }

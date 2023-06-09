@@ -14,7 +14,7 @@ public class ServerReceiveThread extends Thread {
     public ServerReceiveThread(ObjectInputStream objectInputStream, Connection connection) {
         this.objectInputStream = objectInputStream;
         this.connection = connection;
-        this.isRunning = false;
+        this.isRunning = true;
         System.out.println("Created ServerReceiveThread");
     }
 
@@ -24,11 +24,12 @@ public class ServerReceiveThread extends Thread {
             while (this.isRunning) {
                 try {
                     Message msg = (Message) this.objectInputStream.readObject();
-
+                    System.out.println("Messege received from client");
                     switch (msg.type) {
                         case clickData -> {
                             System.out.println("Received click data from client");
 //                            main.handleClickData(msg.data); //todo
+                            Main.receiveClick(((ClickData)msg.data).x_cord,((ClickData)msg.data).y_cord,((ClickData)msg.data).flag);
                         }
                         case stopCommunication -> {
                             System.out.println("Received stop comm from client");

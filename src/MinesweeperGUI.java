@@ -186,7 +186,10 @@ public class MinesweeperGUI extends JFrame {
          JOptionPane.showMessageDialog(null, "Congratulations! You Win!");
          disableButtons();
      }
-
+    public void defeat() {
+        JOptionPane.showMessageDialog(null, "Game Over!");
+        disableButtons();
+    }
 }
 
 

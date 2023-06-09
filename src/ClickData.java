@@ -1,4 +1,6 @@
-public class ClickData {
+import java.io.Serializable;
+
+public class ClickData implements Serializable {
     public int x_cord;
     public int y_cord;
     public boolean flag;

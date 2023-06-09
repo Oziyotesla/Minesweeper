@@ -59,9 +59,6 @@ public class Main {
             //board update
             if(gameboard.isVictory()){
             }
-            if(Multi){
-
-            }
             //GUI update
             //tcp ip update
         }
@@ -150,10 +147,12 @@ public class Main {
     }
 
     public static boolean receiveClick(int x, int y, boolean flag) {
+        boolean bomb;
         boolean clickValid = (Multi == false)|((Multi == true)&(turn == true));
         if(clickValid) {
             if (flag == false) {
-                return gameboard.revealXY(x, y);
+                bomb = gameboard.revealXY(x, y);
+                return bomb;
             }
             else
                 return gameboard.flagXY(x, y);

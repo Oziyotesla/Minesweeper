@@ -190,10 +190,23 @@ public class GameBoard {
     public void setBoard(boolean[][] bombarray) {
         board = new Block[xSize][ySize];
         for (int i = 0; i < xSize; i++) {
-            for (int j = 0; j < ySize; i++) {
+            for (int j = 0; j < ySize; j++) {
                 board[i][j] = new Block(i, j, bombarray[i][j]);
             }
         }
+        if (DEBUG) {
+            System.out.printf("\n");
+        }
+        if (DEBUG) {
+            System.out.printf("GameBoard is filled.\n");
+        }
+        neigbourReferences();
+        if (DEBUG) {
+            System.out.printf("Neigbours are set.\n");
+        }
+
+        minesweeperGUI = new MinesweeperGUI(xSize, ySize);
+        board[0][0].setGUIref(minesweeperGUI);
     }
 
     public boolean revealXY(int x, int y) {

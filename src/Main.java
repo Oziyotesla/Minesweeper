@@ -119,14 +119,13 @@ public class Main {
         }
         System.out.println("before dispose");
         mainmenu.dispose();
-        System.out.println("after dispose");
 
     }
 
     public static void CreateServer() {
         communicationHandler = new CommunicationHandler();
         communicationHandler.hostGame();
-        while(communicationHandler.activeConnection == null);
+        //while(communicationHandler.activeConnection == null);
 
     }
 

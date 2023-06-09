@@ -51,6 +51,7 @@ public class MultiPlayerWindow extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Start Game button clicked");
                 Main.clickGame(true);
+                //Main.IPGame();
                 dispose();
                 // Start game logic here
             }

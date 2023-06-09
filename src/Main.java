@@ -1,5 +1,5 @@
-import communication.CommunicationHandler;
-import communication.StartData;
+//import communication.CommunicationHandler;
+//import communication.StartData;
 
 import java.util.Scanner;
 
@@ -111,7 +111,7 @@ public class Main {
             System.out.println("after setsize");
             startData.setBombMap(gameboard.getBombMap());
             System.out.println("after getbombmap");
-            //communicationHandler.sendStartGame(startData);
+            communicationHandler.sendStartGame(startData);
             turn = true;
         }
         else{
@@ -126,12 +126,15 @@ public class Main {
     public static void CreateServer() {
         communicationHandler = new CommunicationHandler();
         communicationHandler.hostGame();
+        while(communicationHandler.activeConnection == null);
+
     }
 
-    public void IPGame(int difficulty,boolean[][] bombarray){
+    public static void IPGame(StartData startData){
         turn = false;
-        diffToBoard(difficulty);
-        gameboard.setBoard(bombarray);
+        diffToBoard(startData.getDifficulty());
+        //gameboard.setBoardSize(startData.getXsize(),startData.getYsize(),0);
+        gameboard.setBoard(startData.getBombMap());
     }
     public static void IPConnect(String IP ){
         communicationHandler = new CommunicationHandler();

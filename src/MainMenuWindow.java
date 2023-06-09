@@ -76,6 +76,7 @@ public class MainMenuWindow extends JFrame {
                 //openMinesweeperGUI();
                 String ip = textField.getText();
                 Main.IPConnect(ip);
+
             }
         });
 

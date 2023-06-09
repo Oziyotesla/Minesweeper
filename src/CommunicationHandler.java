@@ -1,7 +1,7 @@
-package communication;
+//package communication;
 
-import communication.ClientReceiveThread;
-import communication.ClientTransmitThread;
+//import communication.ClientReceiveThread;
+//import communication.ClientTransmitThread;
 
 import java.io.*;
 import java.net.Inet4Address;
@@ -30,7 +30,7 @@ public class CommunicationHandler extends Thread {
         Socket socket;
         try {
             socket = new Socket(ip, CommunicationHandler.Port);
-            socket.setSoTimeout(100);
+            socket.setSoTimeout(500);
             OutputStream outputStream = socket.getOutputStream();
             InputStream inputStream = socket.getInputStream();
             this.clientObjectOutputStream = new ObjectOutputStream(outputStream);

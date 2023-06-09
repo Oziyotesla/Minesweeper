@@ -1,4 +1,4 @@
-package communication;
+//package communication;
 
 import java.io.*;
 import java.net.Inet4Address;

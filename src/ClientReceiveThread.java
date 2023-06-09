@@ -1,5 +1,6 @@
-package communication;
+//package communication;
 
+//import com.sun.tools.javac.Main;
 import java.io.EOFException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -27,7 +28,7 @@ public class ClientReceiveThread extends Thread{
                         //todo check if all related request are handled
                         case startingMinefieldData -> {
                             System.out.println("Received start minefield from server");
-//                            main.handleminefieldData(msg.data);
+                            Main.IPGame((StartData) msg.data);
                             //todo handle request
                         }
                         case clickData -> {

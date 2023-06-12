@@ -29,11 +29,7 @@ public class MinesweeperGUI extends JFrame {
             e.printStackTrace();
         }
 
-        try {
-            flagIcon = new ImageIcon(getClass().getResource("bomb.png"));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+
 
         // Load the number images
         try {
@@ -58,7 +54,7 @@ public class MinesweeperGUI extends JFrame {
 
     private void initializeGUI() {
         setTitle("Minesweeper");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
 
         JPanel panel = new JPanel();
@@ -107,10 +103,11 @@ public class MinesweeperGUI extends JFrame {
             if (SwingUtilities.isRightMouseButton(e)) {
                 // Right-click: Place flag
                 if (button.getIcon() == flagIcon) {
-                    button.setIcon(null);
+                    //button.setIcon(null);
                     Main.clickBomb(row, col, true);
                 } else {
-                    button.setIcon(flagIcon);
+                    //button.setIcon(flagIcon);
+                    Main.clickBomb(row, col, true);
                 }
             } else {
                 if (Main.clickBomb(row, col, false) == true) {
@@ -189,6 +186,10 @@ public class MinesweeperGUI extends JFrame {
     public void defeat() {
         JOptionPane.showMessageDialog(null, "Game Over!");
         disableButtons();
+    }
+
+    public void changeFlagStatus(int x, int y, boolean flag) {
+        buttons[x][y].setIcon(flag ? flagIcon : null);
     }
 }
 

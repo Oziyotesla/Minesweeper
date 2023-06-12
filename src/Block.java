@@ -44,6 +44,7 @@ public class Block {
 
     public void setFlagged(boolean flag){
         isFlagged = flag;
+        GUIref.changeFlagStatus(x,y,flag);
         //redraw block
     }
 
@@ -51,16 +52,21 @@ public class Block {
         if(isRevealed){
             return isBomb;
         }
-        GUIref.revealEmptyCells(x, y);
-        isRevealed = true;
-        //redraw block
-        if(isBomb == false) {
-            if (bombNeibour == 0) {
-                for (int i = 0; Neibours[i] != null; i++)
-                    Neibours[i].reveal();
+        if(isFlagged==false) {
+            GUIref.revealEmptyCells(x, y);
+            isRevealed = true;
+            //redraw block
+            if (isBomb == false) {
+                if (bombNeibour == 0) {
+                    for (int i = 0; Neibours[i] != null; i++)
+                        Neibours[i].reveal();
+                }
             }
+            return isBomb;
         }
-        return isBomb;
+        else {
+            return false;
+        }
     }
 
     public void setNeibours(Block[] N){

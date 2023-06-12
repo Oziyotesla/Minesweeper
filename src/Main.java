@@ -52,15 +52,14 @@ public class Main {
                 //    exit = true;
                 }
             }
-            gameboard = new GameBoard();
+            //gameboard = new GameBoard();
             try{Thread.sleep(200);}
             catch(InterruptedException ex) {Thread.currentThread().interrupt();}
             //timer
+            
             //board update
             if(gameboard.isVictory()){
             }
-            //GUI update
-            //tcp ip update
         }
         //scanner.close();
     }
@@ -68,7 +67,9 @@ public class Main {
         boolean clickValid = (Multi == false)|((Multi == true)&(turn == true));
         if(clickValid) {
             ClickData clickData = new ClickData(x,y,flag);
-            communicationHandler.sendClickData(clickData);
+            if(Multi) {
+                communicationHandler.sendClickData(clickData);
+            }
             if (flag == false) {
                 return gameboard.revealXY(x, y);
             }
@@ -155,7 +156,8 @@ public class Main {
                 return bomb;
             }
             else
-                return gameboard.flagXY(x, y);
+                bomb = gameboard.flagXY(x, y);
+                return bomb;
         }
         return false;
     }

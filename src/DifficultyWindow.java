@@ -29,6 +29,7 @@ public class DifficultyWindow extends JFrame {
                 System.out.println("Chill button clicked");
                 diffnum = 1;
                 // Chill mode logic here
+                Main.setDifficulty(diffnum);
             }
         });
 
@@ -40,6 +41,8 @@ public class DifficultyWindow extends JFrame {
                 System.out.println("Eco button clicked");
                 diffnum = 2;
                 // Eco mode logic here
+                Main.setDifficulty(diffnum);
+
             }
         });
 
@@ -51,6 +54,8 @@ public class DifficultyWindow extends JFrame {
                 System.out.println("Ludicrous button clicked");
                 diffnum = 3;
                 // Ludicrous mode logic here
+                Main.setDifficulty(diffnum);
+
             }
         });
 

@@ -14,7 +14,7 @@ public class MinesweeperGUI extends JFrame {
 
     private ImageIcon[] numberIcons;
 
-    private ImageIcon bombicon;
+    private ImageIcon bombIcon;
 
 
     public MinesweeperGUI(int rows, int cols) {
@@ -28,6 +28,13 @@ public class MinesweeperGUI extends JFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        try {
+            bombIcon = new ImageIcon(getClass().getResource("bomb.png"));
+        } catch (Exception ee) {
+            ee.printStackTrace();
+        }
+
 
 
 
@@ -112,9 +119,11 @@ public class MinesweeperGUI extends JFrame {
             } else {
                 if (Main.clickBomb(row, col, false) == true) {
                     // Game over - a mine was clicked
-                    button.setText("X");
+                    //button.setText("X");
+                    button.setIcon(bombIcon);
                     JOptionPane.showMessageDialog(null, "Game Over!");
-                    revealMines();
+
+                    //revealMines(int i, int j);
                     disableButtons();
                 } else {
                     // Show the number of adjacent mines
@@ -134,16 +143,13 @@ public class MinesweeperGUI extends JFrame {
         }
     }
 
-    private void revealMines() {
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < cols; j++) {
-                if (board[i][j] == -1) {
-                    buttons[i][j].setText("X");
+    private void revealMines(int i, int j) {
+
+                    buttons[i][j].setIcon(bombIcon);
+                    //buttons[i][j].setText("X");
                     buttons[i][j].setEnabled(false);
                 }
-            }
-        }
-    }
+
 
     public void revealEmptyCells(int row, int col) {
         if (row < 0 || row >= rows || col < 0 || col >= cols || buttons[row][col].isEnabled() == false)

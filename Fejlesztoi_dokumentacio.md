@@ -74,6 +74,27 @@ Megváltoztatja a megadott pozícióban lévő gomb ikonját a zászló ikonra v
 Ezen felül a `MinesweeperGUI` osztály rendelkezik a következő adattagokkal:
 
 - `private JButton[][] buttons`: A játéktábla gombjait tartalmazó 2D-s tömb.
+
+
+## Main Menu Window
+
+Az osztály konstruktora inicializálja a főmenü ablakát. Beállítja az ablak címét, bezárás működését és a méretet. Létrehoz egy `JPanel` objektumot, amely a főmenüt fogja tartalmazni. Beállítja a panel elrendezését `GridLayout`-ra, amely egy oszlopos elrendezést használ. Beállítja a háttérszínt, a margókat és a belső margókat.
+
+Létrehozza a különböző gombokat (`Difficulty`, `1 Player`, `2 Player`, `Connect`) és beállítja a gomb méretét, betűtípusát és eseménykezelőt. Az eseménykezelők reagálnak a gomb lenyomására és elvégzik a megfelelő műveleteket. Például a `Difficulty` gomb lenyomásakor megnyitja a nehézségi ablakot (`DifficultyWindow`), a `1 Player` gomb lenyomásakor pedig elindítja a játékot egyjátékos módra.
+
+Létrehozza a `textField` objektumot, amely egy szövegmezőt tartalmaz.
+
+Hozzáadja a gombokat és a szövegmezőt a panelhez, majd beállítja a panelt az ablak tartalmára. Beállítja az ablak méretét és helyzetét, majd láthatóvá teszi az ablakot.
+
+#### `openMinesweeperGUI()`
+
+Ez a privát segédmetódus a Minesweeper GUI-t nyitja meg. Beállítja a játékmező méretét és az aknák számát. Bezárja a főmenü ablakot, majd létrehozza és megjeleníti a `MinesweeperGUI` objektumot a megadott paraméterekkel.
+
+#### `main(String[] args)`
+
+Ez a metódus az alkalmazás belépési pontja. Létrehoz egy `MainMenuWindow` objektumot, amely inicializálja és megjeleníti a főmenüt.
+
+Ez a dokumentáció röviden áttekinti a `MainMenuWindow` osztályt és annak metódusait, amelyek felelősek a főmenü grafikus felhasználói felületének létrehozásáért és az események kezeléséért.
 - `private int[][] board`: A játéktábla állapotát tároló 2D-s tömb.
 - `private int rows`: A játéktábla sorainak száma.
 - `private int cols`: A játéktábla oszlopainak száma.
@@ -82,3 +103,57 @@ Ezen felül a `MinesweeperGUI` osztály rendelkezik a következő adattagokkal:
 - `private ImageIcon bombIcon`: A bomba ikon.
 
 Ez a dokumentáció tartalmazza a `MinesweeperGUI` osztály legfontosabb metódusait és adattagjait. Ezen információk alapján lehetőséged van megérteni az osztály működését és felhasználni azt a játék fejlesztése során.
+
+A fenti kód egy `MultiPlayerWindow` osztályt tartalmaz, amely a többjátékos módhoz szükséges ablakot valósítja meg a "Minesweeper" játékban. Az osztály a `JFrame` osztályból származik, és a grafikus felhasználói felületet hozza létre.
+
+## MultiPlayer Window
+
+#### Metódusok:
+
+#### `MultiPlayerWindow()`
+
+Az osztály konstruktora inicializálja a többjátékos ablakát. Beállítja az ablak címét és a méretet. Létrehoz egy `JPanel` objektumot, amely a többjátékos ablak tartalmát fogja tartalmazni. Beállítja a panel elrendezését `GridLayout`-ra, amely egy oszlopos elrendezést használ. Beállítja a háttérszínt, a margókat és a belső margókat.
+
+Létrehozza a "Create Server" gombot (`createServerButton`) és beállítja a méretét, betűtípusát és eseménykezelőt. Az eseménykezelő arra reagál, hogyha a gombot megnyomják, és meghívja a `Main.CreateServer()` metódust.
+
+Létrehozza a `connectedIndicator` nevű `JLabel` objektumot, amely az állapotjelzőt fogja tartalmazni. Beállítja a méretét és frissíti az állapotjelzőt a `updateConnectedIndicator()` metódus segítségével.
+
+Létrehozza a "Start Game" gombot (`startGameButton`) és beállítja a méretét, betűtípusát és eseménykezelőt. Az eseménykezelő arra reagál, hogyha a gombot megnyomják, és elindítja a többjátékos játékot a `Main.clickGame(true)` és `Main.createTimer()` metódusok meghívásával, valamint bezárja a többjátékos ablakot.
+
+Hozzáadja a gombokat és az állapotjelzőt a panelhez, majd beállítja a panelt az ablak tartalmára. Beállítja az ablak méretét és helyzetét, majd láthatóvá teszi az ablakot.
+
+#### `main(String[] args)`
+
+Ez a metódus az alkalmazás belépési pontja. Létrehoz egy `MultiPlayerWindow` objektumot, amely inicializálja és megjeleníti a többjátékos ablakot.
+
+#### `setConnected(boolean connected)`
+
+Ez a metódus beállítja a `isConnected` változót a kapott értékre, majd frissíti az állapotjelzőt a `updateConnectedIndicator()` metódus segítségével.
+
+#### `updateConnectedIndicator()`
+
+Ez a privát segédmetódus frissíti az állapotjelzőt a `isConnected` változó alapján. Ha a `isConnected` értéke igaz, akkor a háttérszín zöld lesz, egyébként piros. Beállítja az állapotjelzőt átlátszóvá, hogy megjelenjen a háttérszín változása.
+
+Ez a dokumentáció röviden áttekinti a `MultiPlayerWindow` osztályt és annak metódusait, amelyek felelősek a többjátékos ablak grafikus felhasználói felületének létrehozásáért, az állapotjelző frissítéséért és az események kezeléséért.
+
+## Difficulty Window
+
+### Metódusok:
+
+#### `DifficultyWindow()`
+
+Az osztály konstruktora inicializálja a nehézségi ablakot. Beállítja az ablak címét és a méretet. Létrehoz egy `JPanel` objektumot, amely a nehézségi ablak tartalmát fogja tartalmazni. Beállítja a panel elrendezését `GridLayout`-ra, amely egy oszlopos elrendezést használ. Beállítja a háttérszínt, a margókat és a belső margókat.
+
+Létrehozza a "Chill" gombot (`chillButton`) és beállítja a méretét, betűtípusát és eseménykezelőt. Az eseménykezelő arra reagál, hogyha a gombot megnyomják, és beállítja a `diffnum` változót 1-re, majd meghívja a `Main.setDifficulty(diffnum)` metódust.
+
+Létrehozza az "Eco" gombot (`ecoButton`) és beállítja a méretét, betűtípusát és eseménykezelőt. Az eseménykezelő arra reagál, hogyha a gombot megnyomják, és beállítja a `diffnum` változót 2-re, majd meghívja a `Main.setDifficulty(diffnum)` metódust.
+
+Létrehozza a "Ludicrous" gombot (`ludicrousButton`) és beállítja a méretét, betűtípusát és eseménykezelőt. Az eseménykezelő arra reagál, hogyha a gombot megnyomják, és beállítja a `diffnum` változót 3-ra, majd meghívja a `Main.setDifficulty(diffnum)` metódust.
+
+Hozzáadja a gombokat a panelhez, majd beállítja a panelt az ablak tartalmára. Beállítja az ablak méretét és helyzetét, majd láthatóvá teszi az ablakot.
+
+#### `main(String[] args)`
+
+Ez a metódus az alkalmazás belépési pontja. Létrehoz egy `DifficultyWindow` objektumot, amely inicializálja és megjeleníti a nehézségi ablakot.
+
+Ez a dokumentáció röviden áttekinti a `DifficultyWindow` osztályt és annak metódusait, amelyek felelősek a nehézségi ablak grafikus felhasználói felületének létrehozásáért és

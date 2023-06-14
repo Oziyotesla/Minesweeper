@@ -159,7 +159,7 @@ Ez a metódus az alkalmazás belépési pontja. Létrehoz egy `DifficultyWindow`
 
 ## CommunicationHandler
 
-![commHandler.png](..%2F..%2FOneDrive%2FPictures%2FcommHandler.png)
+![commHandler.png](commHandler.png)
 
 A feladata, hogy segítsen vezérelni minden kommunikációval kapcsolatos eljárást.
 Ezt az osztályt kell példányosítani és ennek a függvényeivel lehet meghívni a játék számára szolgáltatott funkciókat.

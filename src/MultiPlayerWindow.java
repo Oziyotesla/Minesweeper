@@ -6,7 +6,6 @@ import java.awt.event.ActionListener;
 public class MultiPlayerWindow extends JFrame {
 
     private boolean isConnected;
-    private boolean isServerActive;
 
     public MultiPlayerWindow() {
         setTitle("Minesweeper - Multiplayer");
@@ -27,7 +26,6 @@ public class MultiPlayerWindow extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Create Server button clicked");
                 // Create server logic here
-                //setServerActive(true);
                 //Main.clickGame(true);
                 Main.CreateServer();
             }
@@ -38,10 +36,6 @@ public class MultiPlayerWindow extends JFrame {
         connectedIndicator.setPreferredSize(new Dimension(20, 20));
         //updateConnectedIndicator();
 
-        // Create the server active indicator (LED)
-        JLabel serverActiveIndicator = new JLabel();
-        serverActiveIndicator.setPreferredSize(new Dimension(20, 20));
-        //updateServerActiveIndicator();
 
         // Create the start game button
         JButton startGameButton = new JButton("Start Game");
@@ -61,8 +55,6 @@ public class MultiPlayerWindow extends JFrame {
         panel.add(createServerButton);
         panel.add(new JLabel("Connected:"));
         panel.add(connectedIndicator);
-        panel.add(new JLabel("Server Active:"));
-        panel.add(serverActiveIndicator);
         panel.add(startGameButton);
 
         // Add the panel to the frame
@@ -74,7 +66,7 @@ public class MultiPlayerWindow extends JFrame {
         setVisible(true);
     }
 
-    // Rest of the code...
+
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> new MultiPlayerWindow());

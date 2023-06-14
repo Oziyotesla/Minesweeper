@@ -102,9 +102,6 @@ Ez a dokumentáció röviden áttekinti a `MainMenuWindow` osztályt és annak m
 - `private ImageIcon[] numberIcons`: A számok ikonjainak tömbje.
 - `private ImageIcon bombIcon`: A bomba ikon.
 
-Ez a dokumentáció tartalmazza a `MinesweeperGUI` osztály legfontosabb metódusait és adattagjait. Ezen információk alapján lehetőséged van megérteni az osztály működését és felhasználni azt a játék fejlesztése során.
-
-A fenti kód egy `MultiPlayerWindow` osztályt tartalmaz, amely a többjátékos módhoz szükséges ablakot valósítja meg a "Minesweeper" játékban. Az osztály a `JFrame` osztályból származik, és a grafikus felhasználói felületet hozza létre.
 
 ## MultiPlayer Window
 
@@ -134,7 +131,6 @@ Ez a metódus beállítja a `isConnected` változót a kapott értékre, majd fr
 
 Ez a privát segédmetódus frissíti az állapotjelzőt a `isConnected` változó alapján. Ha a `isConnected` értéke igaz, akkor a háttérszín zöld lesz, egyébként piros. Beállítja az állapotjelzőt átlátszóvá, hogy megjelenjen a háttérszín változása.
 
-Ez a dokumentáció röviden áttekinti a `MultiPlayerWindow` osztályt és annak metódusait, amelyek felelősek a többjátékos ablak grafikus felhasználói felületének létrehozásáért, az állapotjelző frissítéséért és az események kezeléséért.
 
 ## Difficulty Window
 
@@ -156,4 +152,3 @@ Hozzáadja a gombokat a panelhez, majd beállítja a panelt az ablak tartalmára
 
 Ez a metódus az alkalmazás belépési pontja. Létrehoz egy `DifficultyWindow` objektumot, amely inicializálja és megjeleníti a nehézségi ablakot.
 
-Ez a dokumentáció röviden áttekinti a `DifficultyWindow` osztályt és annak metódusait, amelyek felelősek a nehézségi ablak grafikus felhasználói felületének létrehozásáért és

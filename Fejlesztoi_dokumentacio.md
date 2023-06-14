@@ -1,4 +1,6 @@
-Fejlesztői dokumentáció - MinesweeperGUI osztály
+# Fejlesztői dokumentáció
+
+## MinesweeperGUI osztály
 
 A `MinesweeperGUI` osztály egy felhasználói felületet nyújt a "Minesweeper" játékhoz. Az osztály felelős a játéktábla megjelenítéséért, a gombok kezeléséért és a játékállapot frissítéséért.
 
@@ -67,9 +69,7 @@ Megjeleníti a "Játék vége!" üzenetet és letiltja az összes gombot.
 public void changeFlagStatus(int x, int y, boolean flag)
 ```
 
-Megv
-
-áltoztatja a megadott pozícióban lévő gomb ikonját a zászló ikonra vagy a nullára (`null`) a `flag` paraméter alapján.
+Megváltoztatja a megadott pozícióban lévő gomb ikonját a zászló ikonra vagy a nullára (`null`) a `flag` paraméter alapján.
 
 Ezen felül a `MinesweeperGUI` osztály rendelkezik a következő adattagokkal:
 

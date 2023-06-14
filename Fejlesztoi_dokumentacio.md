@@ -152,3 +152,225 @@ Hozzáadja a gombokat a panelhez, majd beállítja a panelt az ablak tartalmára
 
 Ez a metódus az alkalmazás belépési pontja. Létrehoz egy `DifficultyWindow` objektumot, amely inicializálja és megjeleníti a nehézségi ablakot.
 
+
+
+
+
+
+## CommunicationHandler
+
+![commHandler.png](..%2F..%2FOneDrive%2FPictures%2FcommHandler.png)
+
+A feladata, hogy segítsen vezérelni minden kommunikációval kapcsolatos eljárást.
+Ezt az osztályt kell példányosítani és ennek a függvényeivel lehet meghívni a játék számára szolgáltatott funkciókat.
+```java
+public boolean joinGame(String ip)
+```
+Paraméterként kap egy string-et, mely azt az IP címet tartalmazza amelyre csatlakozni szeretnénk. A Cél egy TCP kapcsolat kialakítása.
+Ennek megfelelően, kliensként létrehoz egy socket-et, elmenti a hozzá tartozó I/O stream-eket,
+majd pedig küld egy egy joinRequest típusú üzenetet (Message class), várakozik a válaszra és ha sikerült a kapcsolat,
+létrehoz a kliens számára egy üzenet fogadó és küldő class-t (ClientReceiveThread és ClientTransmitThread).
+```java
+public void hostGame()
+```
+
+Ha ez a függvény hívódik, akkor az azt jelenti, hogy Host-ként fog funkcionálni a CommunicationHandler class.
+A JoinReqHandler class segítségével létrehozza a server socket-et, és várakozik arra, hogy valaki csatlakozzon hozzá.
+Ezt a folyamatot a JoinReqHandler.start() fügvénnyel lehet elindítani.
+JoinReqHandler-rel kapcsolatos információkat a hozzá tartozó leírásánál részletezem.
+```java
+public void stopAllCommunication()
+```
+
+Meghívásakor megszünteti az eddig létrehozott kommunikációs kapcsolatot,
+legyen az kliens vagy host, és ezt üzenetként jelzi is a másik félnek.
+
+```java
+public void sendStartGame(Object data)
+```
+
+Host esetén, készít egy üzenetet a kapott paraméter alapján, ami a generált aknamezőt tartalmazza és továbbítja azt a kliensnek.
+
+```java
+public void sendClickData(Object data)
+```
+
+Készít egy üzenetet a kapott paraméter alapján, ami a kliens vagy a host aknamezején történt kattintással kapcsolatos információkat tartalmazza,
+és továbbítja az a másik félnek.
+
+```java
+public void sendTimeData(Object data)
+```
+
+Host esetén, készít egy üzenetet a kapott paraméter alapján, ami a játékidőt tartalmazza,
+és továbbítja az a másik félnek.
+
+```java
+public boolean checkIfConnectionActive()
+```
+
+CommunicationHandler egy változóját vizsgálja, ami ha nem null értékű, akkor az azt jelenti, hogy a host-hoz csatlakoztak, létrejött egy kapcsolat.
+
+## Message
+
+A segítségével készítjük el az üzeneteket, melyek nem csupán adattal rendelkeznek, hanem meg is lehet határozni az üzenet típusát.
+- `joinRequest`
+- `joinAccepted`
+- `stopCommunication`
+- `startingMinefieldData`
+- `clickData`
+- `timeData`
+
+
+## ClientReceiveThread
+
+A joinGame() hívása során jön létre ez a thread. A class feladata, hogy fogadja a szervertől kapott üzeneteket.
+
+```java
+public ClientReceiveThread(ObjectInputStream objectInputStream)
+```
+
+ObjectInputStream-et kapja paraméterként, melyet eltárol és elindítja a szál futását.
+
+```java
+public void run()
+```
+
+A szál futása során az objectInputStream-ből kiolvassa a kapott Message class típusú üzeneteket
+és a tartalmának megfelelően feldolgozza azokat. Ezután folytatódik a szál futása és további üzenetekre vár.
+
+```java
+public void stopReceive()
+```
+
+Szükség esetén le lehet állítani a szál futását.
+
+## ClientTransmitThread
+
+A joinGame() hívása során jön létre ez a thread. A kliens nem csak fogadja az üzeneteket, hanem küldeni is szeretne, amit a ClientTransmitThread-del kivitelezek.
+
+```java
+public ClientTransmitThread(ObjectOutputStream objectOutputStream)
+```
+
+Paraméterként megkapja ObjectOutputStream-et. Létrehoz egy láncolt lista típusú változót, mely a küldendő üzeneteket tárolja.
+Továbbá elindítja a szál futását.
+
+```java
+public void run()
+```
+
+A szál futása során folyamatosan ellenőrzi, hogy van e küldendő üzenet, amennyiben van akkor azt kiveszi a listából, és elküldi, majd pedig
+újra megnézi, hogy van e még üzenet a listában.
+
+```java
+public void sendMessage(Message msg)
+```
+
+A paraméterként kapott üzenetet hozzáadja a láncolt listához, ezáltal ő az a funkció akit meg kell hívni, hogy üzenetet lehessen küldeni.
+
+```java
+public void stopTransmit()
+```
+
+Szükség esetén le lehet állítani a szál futását.
+
+
+## JoinReqHandler
+
+Mikor a hostGame függvény meghívódik, egy hosszasabb folyamat indul be, melynek első részét ez a class valósítja meg.
+Ez egy thread, ami a konstruktor segítségével azonnal futni kezd.
+
+```java
+public void run()
+```
+
+Létrehoz egy szerver socket-et, majd várakozunk a kliens csatlakozására. Ha létrejött a kapcsolat, akkor CreateConnection
+class segítségével létre hozom a host kommunikációját támogató osztályokat. Ezután már nem lehet csatlakozni a szerverhez.
+
+```java
+public void stopListening()
+```
+Ez a függvény zárja le a szerver socket-et.
+
+## CreateConnection
+
+```java
+public CreateConnection(Socket serverSocket, CommunicationHandler communicationHandler)
+```
+
+Ennek csupán egy konstruktora van. Ő kezeli le a kapcsolat létrejöttét szerver oldalon. Kizárólag a JoinReqHandler hívja meg.
+Ha a szerver input stream-jén érkezö üzenet, joinRequest típusú, akkor létrehoz egy Connection típusú változót.
+
+## Connection
+
+```java
+public Connection(Socket serverSocket,
+ObjectInputStream objectInputStream,
+ObjectOutputStream objectOutputStream
+)
+```
+
+Miután sikerült a csatlakozás, és meggyőződtünk róla, hogy valóban a játékhoz szeretne csatlakozni a kliens,
+a CommunicationHandler activeConnection változóját felülírjuk ennek a class-nak a példányával.
+Ez az osztály tárolja el a szerver socket-et, illetve létrehozza és szintén tárolja a szerverhez tartozó kommunikációt segítő osztályokat.
+
+```java
+public void closeConnection()
+```
+
+A class által felülírt változókat törli és zárja a server socket-et.
+
+## ServerReceiveThread
+
+```java
+public ServerReceiveThread(ObjectInputStream objectInputStream, Connection connection)
+```
+
+Feladata, hogy fogadja a klienstől kapott üzeneteket. A konstruktora elmenti a paraméterül kapott InputStream objektumot,
+és engedélyezi a szál működését.
+
+```java
+public void run()
+```
+
+Futása során, folyamatosan leolvassa az Input stream-et. Amennyiben olyan üzenet érkezett amire számítottunk,
+akkor azt lekezeli, egyébként ignorálja.
+
+```java
+public void stopServer()
+```
+```java
+public void startServer()
+```
+
+Ez a két függvény tudja tiltani és engedélyezni az Input stream leolvasását, a szál futása közben.
+
+## ServerTransmitThread
+
+```java
+public ServerTransmitThread(ObjectOutputStream objectOutputStream, Connection connection)
+```
+
+Eredetileg thread lett volna, mint a ClientReceiveThread,
+de rájöttem, hogy erre semmi szükség, így végül csak egyfajta interface-ként funkcionál a CommunicationHandler és
+az Output stream-nek a writeObject függvénye között.
+
+A következő függvényekkel lehet a megfelelő üzeneteket továbbítani:
+
+```java
+public void sendStartGame(Message msg)
+```
+
+```java
+public void sendClickData(Message msg)
+```
+
+```java
+public void sendTimeData(Message msg)
+```
+```java
+public void sendStopCommunication(Message msg)
+```
+
+

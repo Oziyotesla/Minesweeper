@@ -6,38 +6,31 @@ import java.awt.event.ActionListener;
 public class MultiPlayerWindow extends JFrame {
 
     private boolean isConnected;
+    private JLabel connectedIndicator;
 
     public MultiPlayerWindow() {
         setTitle("Minesweeper - Multiplayer");
-        //setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
 
-        // Create the multiplayer panel
         JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(0, 1, 10, 10));
         panel.setBackground(Color.GRAY);
         panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
-        // Create the create server button
         JButton createServerButton = new JButton("Create Server");
         createServerButton.setPreferredSize(new Dimension(150, 50));
         createServerButton.setFont(new Font("Arial", Font.PLAIN, 20));
         createServerButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Create Server button clicked");
-                // Create server logic here
-                //Main.clickGame(true);
                 Main.CreateServer();
             }
         });
 
-        // Create the connected indicator (green LED)
-        JLabel connectedIndicator = new JLabel();
-        connectedIndicator.setPreferredSize(new Dimension(20, 20));
-        //updateConnectedIndicator();
+        connectedIndicator = new JLabel();
+        connectedIndicator.setPreferredSize(new Dimension(10, 10));
+        updateConnectedIndicator();
 
-
-        // Create the start game button
         JButton startGameButton = new JButton("Start Game");
         startGameButton.setPreferredSize(new Dimension(150, 50));
         startGameButton.setFont(new Font("Arial", Font.PLAIN, 20));
@@ -47,26 +40,21 @@ public class MultiPlayerWindow extends JFrame {
                 Main.clickGame(true);
                 Main.createTimer();
                 dispose();
-                // Start game logic here
             }
         });
 
-        // Add the components to the panel
         panel.add(createServerButton);
         panel.add(new JLabel("Connected:"));
         panel.add(connectedIndicator);
         panel.add(startGameButton);
 
-        // Add the panel to the frame
         setContentPane(panel);
         pack();
-        int newWidth = 400; // Specify the desired width
-        setSize(newWidth, getHeight()); // Set the new width while maintaining the existing height
+        int newWidth = 400;
+        setSize(newWidth, getHeight());
         setLocationRelativeTo(null);
         setVisible(true);
     }
-
-
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> new MultiPlayerWindow());
@@ -74,5 +62,15 @@ public class MultiPlayerWindow extends JFrame {
 
     public void setConnected(boolean connected) {
         isConnected = connected;
+        updateConnectedIndicator();
+    }
+
+    private void updateConnectedIndicator() {
+        if (isConnected) {
+            connectedIndicator.setBackground(Color.GREEN);
+        } else {
+            connectedIndicator.setBackground(Color.RED);
+        }
+        connectedIndicator.setOpaque(true);
     }
 }

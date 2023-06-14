@@ -22,6 +22,7 @@ public class CreateConnection {
                 objectOutputStream.writeObject(response);
                 System.out.println("Try to creating the new Connection class");
                 communicationHandler.activeConnection = new Connection(serverSocket, objectInputStream, objectOutputStream);
+                Main.SetConnected(true);
             } else {
                 System.out.println("Received unexpected message type");
             }

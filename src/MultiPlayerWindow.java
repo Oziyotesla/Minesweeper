@@ -71,4 +71,8 @@ public class MultiPlayerWindow extends JFrame {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> new MultiPlayerWindow());
     }
+
+    public void setConnected(boolean connected) {
+        isConnected = connected;
+    }
 }

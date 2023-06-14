@@ -183,6 +183,6 @@ public class Main {
         multiPlayerWindow = multiWindowRef;
     }
     public static void SetConnected(boolean connected){
-        multiPlayerWindow.
+        multiPlayerWindow.setConnected(connected);
     }
 }

@@ -60,7 +60,7 @@ public class MainMenuWindow extends JFrame {
                 System.out.println("2 Player selected. Text: " + text);
                 // Open the Minesweeper GUI when the button is clicked
                 //openMinesweeperGUI();
-                new MultiPlayerWindow();
+                Main.setMultiWindowRef(new MultiPlayerWindow()) ;
             }
         });
 

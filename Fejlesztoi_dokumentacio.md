@@ -1,5 +1,130 @@
 # Fejlesztői dokumentáció
 
+## Main osztály
+
+    exit: Egy logikai érték, ami jelzi, hogy a játék végetért.
+    server: Egy logikai érték, ami jelzi, hogy az adott fél szerver vagy kliens.
+    DEBUG: Egy logikai érték, amely meghatározza a hibakeresési üzenetek kiírását. Ha true, akkor a hibakeresési üzenetek ki vannak írva, ha false, akkor nincsenek kiírva.
+    startTime: Az idő, amikor a játék elindult.
+    Multi: Egy logikai érték, ami jelzi, hogy a játék többjátékos módjában fut-e.
+    turn: Egy logikai érték, ami jelzi, hogy a játékosnak jelenleg ő a soron következő.
+    gameboard: Egy referencia a GameBoard objektumra.
+    difficulty: Az aktuális nehézségi szint.
+    communicationHandler: Egy referencia a CommunicationHandler objektumra, amely a kliens és szerver közötti kommunikációt kezeli.
+    ScoreTracker: Egy referencia a HighScoreTracker objektumra, amely az eredményeket nyomon követi.
+    mainmenu: Egy referencia a MainMenuWindow objektumra, amely a főmenüt reprezentálja.
+    startData: Egy referencia a StartData objektumra, amely a multiplayer játék esetén elküldésre kerül a kliens oldalnak.
+    time: Egy referencia a TimeData objektumra, amivel a kliens oldalnak elküldjük az akutális idejét a játéknak.
+    multiPlayerWindow: Egy referencia a MultiPlayerWindow objektumra, amivel a szervert lehet elindítani.
+
+Metódusok
+
+    main(String[] args): A program belépési pontja.
+    loop(): A játék ciklikus fővezérlője.
+    clickBomb(int x, int y, boolean flag): Az adott mezőre kattintás eseményt kezeli.
+    diffToBoard(int diff): Az adott nehézségi szint alapján beállítja a játéktábla méretét és a bombák számát.
+    clickGame(boolean MultiPlayer): Az új játék kezdetét kezeli.
+    CreateServer(): Szerver mód indítása.
+    IPGame(StartData startData): Ha a szerver elindítja a játékot akkor a kliens ezen keresztül kapja meg a játék kezdeti állapotát.
+    IPConnect(String IP): Az IP alapú kapcsolat létrehozását kezeli.
+    getBombNeibourXY(int x, int y): Az adott mező szomszédos bombáinak számát adja vissza.
+    setDifficulty(int diff): A nehézségi szint beállítása.
+    receiveClick(int x, int y, boolean flag): A multiplayer játékban ezen a fügvényen keresztül kapja meg a kattintás helyzetét.
+    createTimer(): Az időmérő inicializálása.
+    getTime(): Az eltelt idő lekérdezése.
+    receiveTime(TimeData time): Az idő adatok fogadása.
+    setMultiWindowRef(MultiPlayerWindow multiWindowRef): A többjátékos ablak referencia beállítása.
+    SetConnected(boolean connected): A szerver ezen a függvényen keresztül kapja meg ha valaki csatlakozott hozzá.
+
+
+## GameBoard osztály
+
+    DEBUG: Egy logikai érték, amely meghatározza a hibakeresési üzenetek kiírását. Ha true, akkor a hibakeresési üzenetek ki vannak írva, ha false, akkor nincsenek kiírva.
+    MAX_X, MAX_Y, MIN_X, MIN_Y: Az aknakereső játéktábla maximális és minimális méretei az X és Y tengelyeken.
+    MAXiteration: A bombák generálásának maximális iterációs száma, ha ezt túllépem akkor biztos, hogy a játék nem elindítható.
+    xSize, ySize: A játéktábla mérete az X és Y tengelyeken.
+    BombCount: A bombák száma a játéktáblán.
+    rand: Egy Random objektum a véletlenszerű számok generálásához.
+    minesweeperGUI: Egy referencia az MinesweeperGUI objektumra.
+    board: Egy két dimenziós Block objektumokból álló tömb, amely reprezentálja a játéktáblát.
+
+Metódusok
+
+    GameBoard(): Konstruktor, létrehoz egy GameBoard objektumot.
+    xSet(int x): Beállítja az X tengely méretét és ellenőrzi a megadott értéket. Visszaadja a hibakódot, ha nem a határokon belül van a beállított érték.
+    ySet(int y): Beállítja az Y tengely méretét és ellenőrzi a megadott értéket. Visszaadja a hibakódot, ha nem a határokon belül van a beállított érték.
+    bombSet(int b): Beállítja a bombák számát és ellenőrzi a megadott értéket. Visszaadja a hibakódot, ha nem a határokon belül van a beállított érték.
+    setBoardSize(int x, int y, int BC): Beállítja a játéktábla méretét és a bombák számát.Visszaadja a hibakódot, ha nem a határokon belül van a beállított érték.
+    generateBoard(): Generálja a játéktáblát a beállított mérettel és bombaszámmal. Visszaadja a hibakódot, ha nem sikerül legenerálni a táblát.
+    neigbourReferences(): Beállítja a szomszédos mezők referenciáit.
+    printBoard(): Kiírja a játéktábla aktuális állapotát.
+    setBoard(boolean[][] bombarray): Beállítja a játéktáblát a megadott bombatérkép alapján.
+    revealXY(int x, int y): Felfedi az (x, y) koordinátájú mezőt. Visszaadja, hogy bomba volt-e a mező.
+    flagXY(int x, int y): Beállítja vagy törli a zászlót az (x, y) koordinátájú mezőn. Visszaadja az aktuális zászlóállapotot.
+    getBombNeibourXY(int x, int y): Visszaadja a (x, y) koordinátájú mező szomszédos bombák számát.
+    setGUIref(): Beállítja a minesweeperGUI referenciát a játéktáblára.
+    isVictory(): Ellenőrzi, hogy teljesült-e a győzelmi feltétel (minden nem bomba mező felfedezve). Visszaadja, hogy győzelem történt-e.
+    getXSize(): Visszaadja a játéktábla X tengelyének méretét.
+    getYSize(): Visszaadja a játéktábla Y tengelyének méretét.
+    getBombMap(): Visszaadja a bombatérképet logikai tömb formájában.
+    revealbombs(): Felfedi az összes bombát a játéktáblán.
+
+## Block Osztály
+
+    isBomb: Egy logikai érték, amely jelzi, hogy a mezőn van-e bomba.
+    isFlagged: Egy logikai érték, amely jelzi, hogy a mezőre zászló lett-e helyezve.
+    isRevealed: Egy logikai érték, amely jelzi, hogy a mezőt felfedték-e.
+    x: Az x koordináta értéke.
+    y: Az y koordináta értéke.
+    bombNeibour: A szomszédos mezőkön található bombák száma.
+
+Metódusok
+
+    getFlag(): Visszaadja, hogy a mezőre zászló lett-e helyezve.
+    isBomb(): Visszaadja, hogy a mezőn van-e bomba.
+    isRevealed(): Visszaadja, hogy a mezőt felfedték-e.
+    getXCoord(): Visszaadja az x koordináta értékét.
+    getYCoord(): Visszaadja az y koordináta értékét.
+    setFlagged(boolean flag): Beállítja a mezőre zászlót és frissíti a GUI-t.
+    reveal(): Felfedi a mezőt és az ahhoz tartozó üres mezőket, ha nem lett zászlóval ellátva.
+    setNeibours(Block[] N): Beállítja a szomszédos mezők referenciáit és kiszámolja a szomszédos bombák számát.
+    printstate(): Kiírja a mező állapotát a konzolra.
+    getBombNeibour(): Visszaadja a szomszédos bombák számát.
+    setGUIref(MinesweeperGUI ref): Beállítja a GUI referenciát.
+    revealBomb(): Felfedi a bombát a GUI-n.
+
+## ClickData Osztály
+
+    x_cord: A kattintás x koordináta értéke.
+    y_cord: A kattintás y koordináta értéke.
+    flag: Logikai érték, amely jelzi, hogy a kattintás zászló-e.
+
+Metódusok
+
+    ClickData(int x, int y, boolean f): Az osztály konstruktora, beállítja az x és y koordinátákat, valamint a zászló jelölést.
+
+## StartData
+
+    xsize: A játéktábla szélességét jelző egész szám.
+    ysize: A játéktábla magasságát jelző egész szám.
+    bombMap: Egy boolean típusú tömb, amely a bombák elhelyezkedését tartalmazza a játéktáblán.
+    difficulty: Az aktuális nehézségi szintet jelző egész szám.
+
+Metódusok
+
+    setDifficulty(int diff): Beállítja a nehézségi szintet a megadott értékre.
+    setXsize(int x): Beállítja a játéktábla szélességét a megadott értékre.
+    setYsize(int y): Beállítja a játéktábla magasságát a megadott értékre.
+    setBombMap(boolean[][] b): Beállítja a bombatérképet a megadott tömb értékeire.
+    getDifficulty(): Visszaadja a nehézségi szintet.
+    getXsize(): Visszaadja a játéktábla szélességét.
+    getYsize(): Visszaadja a játéktábla magasságát.
+    getBombMap(): Visszaadja a bombatérképet.
+
+## TimeData
+
+    Time: Az időértéket tartalmazó hossz típusú változó.
+
 ## MinesweeperGUI osztály
 
 A `MinesweeperGUI` osztály egy felhasználói felületet nyújt a "Minesweeper" játékhoz. Az osztály felelős a játéktábla megjelenítéséért, a gombok kezeléséért és a játékállapot frissítéséért.

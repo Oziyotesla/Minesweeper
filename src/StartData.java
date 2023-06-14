@@ -19,7 +19,7 @@ public class StartData implements Serializable {
     public void setBombMap(boolean[][] b){
         bombMap = new boolean[xsize][ysize];
         for(int x_d=0; x_d < xsize ; x_d++){
-            for(int y_d=0; y_d < xsize ; y_d++){
+            for(int y_d=0; y_d < ysize ; y_d++){
                 bombMap[x_d][y_d] = b[x_d][y_d];
             }
         }

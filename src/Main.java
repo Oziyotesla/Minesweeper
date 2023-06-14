@@ -87,7 +87,7 @@ public class Main {
                 gameboard.setBoardSize(16,16,40);
                 break;
             case 3:
-                gameboard.setBoardSize(30,16,99);
+                gameboard.setBoardSize(16,30,99);
                 break;
             default:
                 gameboard.setBoardSize(8,8,10);
@@ -107,6 +107,7 @@ public class Main {
             startData = new StartData();
             startData.setXsize(gameboard.getXSize());
             startData.setYsize(gameboard.getYSize());
+            startData.setDifficulty(difficulty);
             startData.setBombMap(gameboard.getBombMap());
             communicationHandler.sendStartGame(startData);
             turn = true;
@@ -129,6 +130,16 @@ public class Main {
         Multi = true;
         diffToBoard(startData.getDifficulty());
         //gameboard.setBoardSize(startData.getXsize(),startData.getYsize(),0);
+        if(DEBUG){
+            boolean [][] debugBomb = startData.getBombMap();
+            for(int i = 0; i<startData.getXsize();i++){
+                for(int j = 0; j<startData.getYsize();j++) {
+                    System.out.print(debugBomb[i][j]);
+                }
+                System.out.println("");
+            }
+
+        }
         gameboard.setBoard(startData.getBombMap());
     }
     public static void IPConnect(String IP ){
@@ -183,6 +194,7 @@ public class Main {
         multiPlayerWindow = multiWindowRef;
     }
     public static void SetConnected(boolean connected){
+        System.out.println("gui set connected");
         multiPlayerWindow.setConnected(connected);
     }
 }

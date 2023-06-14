@@ -143,7 +143,7 @@ public class MinesweeperGUI extends JFrame {
         }
     }
 
-    private void revealMines(int i, int j) {
+    public void revealMines(int i, int j) {
 
                     buttons[i][j].setIcon(bombIcon);
                     //buttons[i][j].setText("X");

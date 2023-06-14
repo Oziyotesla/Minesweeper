@@ -2,8 +2,8 @@ import java.util.Random;
 
 public class GameBoard {
     final boolean DEBUG = true;
-    private final int MAX_X = 30;
-    private final int MAX_Y = 16;
+    private final int MAX_X = 16;
+    private final int MAX_Y = 30;
     private final int MIN_X = 8;
     private final int MIN_Y = 8;
     private final int MAXiteration = 1000;
@@ -212,7 +212,8 @@ public class GameBoard {
     public boolean revealXY(int x, int y) {
         boolean bool = board[x][y].reveal();
         if(bool == true){
-            minesweeperGUI.defeat();
+            revealbombs();
+            //minesweeperGUI.defeat();
         }
         isVictory();
         return bool;
@@ -259,8 +260,19 @@ public class GameBoard {
         for(int x=0; x<xSize;x++){
             for(int y=0; y<ySize;y++){
                 bool[x][y] = board[x][y].isBomb();
+                System.out.print(bool[x][y]);
             }
+            System.out.println("");
         }
         return bool;
+    }
+    private void revealbombs(){
+        for(int x=0; x<xSize;x++){
+            for(int y=0; y<ySize;y++){
+                if(board[x][y].isBomb()){
+                    board[x][y].revealBomb();
+                }
+            }
+        }
     }
 }

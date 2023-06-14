@@ -104,6 +104,9 @@ public class Block {
 
     public void setGUIref(MinesweeperGUI ref){
         GUIref = ref;
+    }
 
+    public void revealBomb() {
+        GUIref.revealMines(x, y);
     }
 }

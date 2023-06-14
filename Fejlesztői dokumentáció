@@ -81,5 +81,4 @@ Ezen felül a `MinesweeperGUI` osztály rendelkezik a következő adattagokkal:
 - `private ImageIcon[] numberIcons`: A számok ikonjainak tömbje.
 - `private ImageIcon bombIcon`: A bomba ikon.
 
-
-
+Ez a dokumentáció tartalmazza a `MinesweeperGUI` osztály legfontosabb metódusait és adattagjait. Ezen információk alapján lehetőséged van megérteni az osztály működését és felhasználni azt a játék fejlesztése során.

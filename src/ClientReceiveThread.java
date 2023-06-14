@@ -25,20 +25,20 @@ public class ClientReceiveThread extends Thread{
                     Message msg = (Message) this.objectInputStream.readObject();
 
                     switch (msg.type) {
-                        //todo check if all related request are handled
                         case startingMinefieldData -> {
                             System.out.println("Received start minefield from server");
                             Main.IPGame((StartData) msg.data);
                         }
                         case clickData -> {
                             System.out.println("Received cilck data from server");
-//                            main.handleClickData(msg.data);
                             Main.receiveClick(((ClickData)msg.data).x_cord,((ClickData)msg.data).y_cord,((ClickData)msg.data).flag);
-                            //todo handle request
+                        }
+                        case timeData -> {
+                            System.out.println("Received timeData from server");
+                            Main.receiveTime(((ClickData)msg.data).x_cord,((ClickData)msg.data).y_cord,((ClickData)msg.data).flag);
                         }
                         case stopCommunication -> {
                             System.out.println("Received stop comm from server");
-//                            main.communicationHandler.stopAllCommunication();
                         }
                     }
                 } catch (SocketException e) {

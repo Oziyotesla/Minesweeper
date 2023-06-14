@@ -116,4 +116,22 @@ public class CommunicationHandler extends Thread {
         }
 
     }
+
+    public void sendTimeData(Object data) {
+        Message msg = new Message(Message.MessageType.timeData, data);
+        if(this.activeConnection != null) {
+            try {
+                this.activeConnection.transmitThread.sendTimeData(msg);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    public boolean checkIfConnectionActive() {
+        if(this.activeConnection != null){
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

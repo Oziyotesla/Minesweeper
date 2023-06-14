@@ -17,6 +17,9 @@ public class ServerTransmitThread extends Thread {
     public void sendClickData(Message msg) throws IOException {
         this.objectOutputStream.writeObject(msg);
     }
+    public void sendTimeData(Message msg) throws IOException {
+        this.objectOutputStream.writeObject(msg);
+    }
     public void sendStopCommunication(Message msg) throws IOException {
         this.objectOutputStream.writeObject(msg);
     }

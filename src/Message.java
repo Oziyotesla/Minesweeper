@@ -9,6 +9,7 @@ public class Message implements Serializable {
         stopCommunication,
         startingMinefieldData,
         clickData,
+        timeData,
     }
 
     public Object data;

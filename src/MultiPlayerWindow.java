@@ -51,7 +51,7 @@ public class MultiPlayerWindow extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Start Game button clicked");
                 Main.clickGame(true);
-                //Main.IPGame();
+                Main.createTimer();
                 dispose();
                 // Start game logic here
             }
@@ -61,8 +61,6 @@ public class MultiPlayerWindow extends JFrame {
         panel.add(createServerButton);
         panel.add(new JLabel("Connected:"));
         panel.add(connectedIndicator);
-        panel.add(new JLabel("Server Active:"));
-        panel.add(serverActiveIndicator);
         panel.add(startGameButton);
 
         // Add the panel to the frame
@@ -73,8 +71,6 @@ public class MultiPlayerWindow extends JFrame {
         setLocationRelativeTo(null);
         setVisible(true);
     }
-
-    // Rest of the code...
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> new MultiPlayerWindow());

@@ -46,6 +46,7 @@ public class MainMenuWindow extends JFrame {
                 // Open the Minesweeper GUI when the button is clicked
                 //openMinesweeperGUI();
                 Main.clickGame(false);
+                Main.createTimer();
             }
         });
 

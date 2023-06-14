@@ -35,7 +35,7 @@ public class ClientReceiveThread extends Thread{
                         }
                         case timeData -> {
                             System.out.println("Received timeData from server");
-                            Main.receiveTime(((ClickData)msg.data).x_cord,((ClickData)msg.data).y_cord,((ClickData)msg.data).flag);
+                            Main.receiveTime((TimeData) msg.data);
                         }
                         case stopCommunication -> {
                             System.out.println("Received stop comm from server");

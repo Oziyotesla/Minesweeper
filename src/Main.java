@@ -5,23 +5,24 @@ import java.util.Scanner;
 
 public class Main {
     public static boolean exit = false;
+    private static boolean server = false;
     private static final boolean DEBUG = true;
-
+    private static long startTime = 0;
     private static boolean Multi = false;
-    private static boolean turn = false;
+    private static boolean turn = true;
     private static GameBoard gameboard = null;
     private static int difficulty = 0;
     private static CommunicationHandler communicationHandler = null;
     private static HighScoreTracker ScoreTracker = new HighScoreTracker();
     private static MainMenuWindow mainmenu = null;
     private static StartData startData = null;
+    public static TimeData time = new TimeData();
+    private static MultiPlayerWindow multiPlayerWindow = null;
     public static void main(String[] args) {
         int err = 0;
-        gameboard = new GameBoard();
+        //gameboard = new GameBoard();
         try{Thread.sleep(200);}
         catch(InterruptedException ex) {Thread.currentThread().interrupt();}
-        //gameboard.setBoardSize(8,8,10);
-        //err = gameboard.generateBoard();
         if(err > 0){
             exit = true;
         }
@@ -37,7 +38,7 @@ public class Main {
         loop();
     }
     private static void loop(){
-        Scanner scanner = new Scanner(System.in);
+        //Scanner scanner = new Scanner(System.in);
         while(exit == false){
             if(DEBUG){
                 //gameboard.printBoard();
@@ -52,14 +53,11 @@ public class Main {
                 //    exit = true;
                 }
             }
-            //gameboard = new GameBoard();
-            try{Thread.sleep(200);}
+            try{Thread.sleep(1000);}
             catch(InterruptedException ex) {Thread.currentThread().interrupt();}
             //timer
-            
-            //board update
-            if(gameboard.isVictory()){
-            }
+            getTime();
+            //System.out.println(System.currentTimeMillis()-startTime);
         }
         //scanner.close();
     }
@@ -99,6 +97,7 @@ public class Main {
 
     public static void clickGame(boolean MultiPlayer){
         Multi = MultiPlayer;
+        gameboard = new GameBoard();
         diffToBoard(difficulty);
         gameboard.generateBoard();
         try{Thread.sleep(1000);}
@@ -108,9 +107,7 @@ public class Main {
             startData = new StartData();
             startData.setXsize(gameboard.getXSize());
             startData.setYsize(gameboard.getYSize());
-            System.out.println("after setsize");
             startData.setBombMap(gameboard.getBombMap());
-            System.out.println("after getbombmap");
             communicationHandler.sendStartGame(startData);
             turn = true;
         }
@@ -118,8 +115,6 @@ public class Main {
             turn = true;
         }
         System.out.println("before dispose");
-        mainmenu.dispose();
-
     }
 
     public static void CreateServer() {
@@ -131,6 +126,7 @@ public class Main {
 
     public static void IPGame(StartData startData){
         turn = true;
+        Multi = true;
         diffToBoard(startData.getDifficulty());
         //gameboard.setBoardSize(startData.getXsize(),startData.getYsize(),0);
         gameboard.setBoard(startData.getBombMap());
@@ -138,6 +134,7 @@ public class Main {
     public static void IPConnect(String IP ){
         communicationHandler = new CommunicationHandler();
         communicationHandler.joinGame(IP);
+        gameboard = new GameBoard();
     }
 
     public static int getBombNeibourXY(int x, int y){
@@ -160,5 +157,32 @@ public class Main {
                 return bomb;
         }
         return false;
+    }
+    public static void createTimer(){
+        startTime = System.currentTimeMillis();
+        server = true;
+        return;
+    }
+    public static long getTime(){
+        if(server){
+            if(Multi) {
+                time.Time = System.currentTimeMillis()-startTime;
+                communicationHandler.sendTimeData(time);
+                System.out.println("Server send time!");
+            }
+            return System.currentTimeMillis()-startTime;
+        }else{
+            return startTime;
+        }
+    }
+    public static void receiveTime(TimeData time){
+        System.out.println("Client get time!");
+        startTime = time.Time;
+    }
+    public static void setMultiWindowRef(MultiPlayerWindow multiWindowRef){
+        multiPlayerWindow = multiWindowRef;
+    }
+    public static void SetConnected(boolean connected){
+        multiPlayerWindow.
     }
 }

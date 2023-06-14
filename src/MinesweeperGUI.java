@@ -54,7 +54,7 @@ public class MinesweeperGUI extends JFrame {
 
     private void initializeGUI() {
         setTitle("Minesweeper");
-        //setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
 
         JPanel panel = new JPanel();
